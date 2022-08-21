@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Area;
-use App\Models\SubArea;
+use App\Models\Category;
+use App\Traits\PhotoTrait;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class SubAreaController extends Controller
+class CategoryController extends Controller
 {
 
-    public function index(Request $request,$id)
+    use PhotoTrait;
+    public function index(request $request)
     {
-        $area=Area::find($id);
-
         if($request->ajax()) {
-            $data = SubArea::where('area_id',$id)->orderBy('id','DESC')->get();
+            $data = Category::orderBy('id','DESC')->get();
             return Datatables::of($data)
                 ->addColumn('action', function ($data) {
                     return '
@@ -27,60 +27,41 @@ class SubAreaController extends Controller
                             </button>
                        ';
                 })
-//                ->addColumn('subArea', function ($data) {
-//                    $link = route('subArea',$data->id);
-//                    return '<a class="btn btn-pill btn-success" href="'.$link.'">معاينة <i class="fa fa-map text-white"></i> </a>';
-//                })
 
                 ->escapeColumns([])
                 ->make(true);
         }else{
-            return view('Admin/subArea/index',compact('area'));
+            return view('Admin/category/index');
         }
-
-
-
-
     }
 
-    public function create($id)
+    public function create()
     {
-       $area=Area::find($id);
-        return view('Admin/subArea.parts.create',compact('area'));
+        return view('Admin/category.parts.create');
     }
-
 
     public function store(Request $request)
     {
         $request->validate([
             'name_ar'   => 'required|max:255|unique:areas,name_ar',
             'name_en'   => 'required|max:255|unique:areas,name_en',
-            'area_id'   => 'required|exists:sub_areas,id'
         ],[
             'name_ar.unique'     => 'اسم الدولة العربي تم ادخاله مسبقا',
             'name_en.unique'     => 'اسم الدولة الانجليزية تم ادخاله مسبقا',
-            'area_id.exists'     =>'هذة المدينة غير مدرجة لدينا',
         ]);
         $data = $request->except('_token');
-        if(SubArea::create($data))
+        if(Category::create($data))
             return response()->json(['status'=>200]);
         else
             return response()->json(['status'=>405]);
     }
 
 
-    public function show($id)
+
+    public function edit(Category $category)
     {
-        //
+        return view('Admin/category.parts.edit',compact('category'));
     }
-
-
-    public function edit($id)
-    {
-        $area=SubArea::find($id);
-        return view('Admin/subArea.parts.edit',compact('area'));
-    }
-
 
 
     public function update(request $request,$id)
@@ -89,24 +70,30 @@ class SubAreaController extends Controller
             'name_ar'       => 'required',
             'name_en'       => 'required',
         ]);
-        $area = SubArea::findOrFail($id);
+        $category = Category::findOrFail($id);
 
-        if ($area->update($inputs))
+        if ($category->update($inputs))
             return response()->json(['status' => 200]);
         else
             return response()->json(['status' => 405]);
     }
 
-    public function delete(Request $request)
-    {
-        $row = SubArea::findOrFail($request->id);
-
-        $row->delete();
-        return response(['message'=>'تم الحذف بنجاح','status'=>200],200);
-    }
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         //
+    }
+
+    public function delete(Request $request)
+    {
+        $row = Category::findOrFail($request->id);
+
+        $row->delete();
+        return response(['message'=>'تم الحذف بنجاح','status'=>200],200);
     }
 }

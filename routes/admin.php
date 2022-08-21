@@ -29,16 +29,19 @@ Route::group(['prefix'=>'admin','middleware'=>'auth:admin'],function (){
     Route::POST('areaDelete','AreaController@delete')->name('area.delete');
 
     ### subAreas ###
-    Route::get('subArea/{id}', 'GovernorateController@index')->name('subArea');
-    Route::post('subAreaDelete', 'GovernorateController@delete')->name('subArea.delete');
-    Route::get('subArea.create/{country_id}', 'GovernorateController@create')->name('subArea.create');
-    Route::post('subArea.store', 'GovernorateController@store')->name('subArea.store');
-    Route::get('subArea.edit/{id}', 'GovernorateController@edit')->name('subArea.edit');
-    Route::POST('subArea.update/{id}', 'GovernorateController@update')->name('subArea.update');
+    Route::get('subArea/{id}', 'SubAreaController@index')->name('subArea');
+    Route::post('subAreaDelete', 'SubAreaController@delete')->name('subArea.delete');
+    Route::get('subArea.create/{country_id}', 'SubAreaController@create')->name('subArea.create');
+    Route::post('subArea.store', 'SubAreaController@store')->name('subArea.store');
+    Route::get('subArea.edit/{id}', 'SubAreaController@edit')->name('subArea.edit');
+    Route::post('subArea.update/{id}', 'SubAreaController@update')->name('subArea.update');
 
 
 
+  ### categories #########
 
+    Route::resource('categories','CategoryController');
+    Route::post('categories.delete','CategoryController@delete')->name('categories.delete');
 
 
 
