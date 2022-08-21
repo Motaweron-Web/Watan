@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2022 at 03:07 PM
+-- Generation Time: Aug 21, 2022 at 05:15 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -64,8 +64,28 @@ CREATE TABLE `areas` (
 --
 
 INSERT INTO `areas` (`id`, `name_ar`, `name_en`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'بغداد', 'Baghdad', 'assets/uploads/area/64291661067877.webp', '2022-08-21 07:44:37', '2022-08-21 07:44:37'),
-(2, 'البصرة', 'Basra', 'assets/uploads/area/93851661068056.webp', '2022-08-21 07:47:37', '2022-08-21 08:20:33');
+(1, 'بغداد', 'Baghdad', 'assets/uploads/area/64291661067877.webp', '2022-08-21 07:44:37', '2022-08-21 07:44:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name_ar`, `name_en`, `created_at`, `updated_at`) VALUES
+(2, 'فلل ggg', 'velal', '2022-08-21 15:10:47', '2022-08-21 15:12:47');
 
 -- --------------------------------------------------------
 
@@ -90,7 +110,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2022_03_20_134518_create_settings_table', 1),
 (5, '2022_08_18_144158_create_sliders_table', 2),
 (6, '2022_08_18_162530_create_areas_table', 3),
-(7, '2022_08_18_162552_create_sub_areas_table', 3);
+(7, '2022_08_18_162552_create_sub_areas_table', 3),
+(8, '2022_08_21_164212_create_categories_table', 4);
 
 -- --------------------------------------------------------
 
@@ -176,6 +197,14 @@ CREATE TABLE `sub_areas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `sub_areas`
+--
+
+INSERT INTO `sub_areas` (`id`, `name_ar`, `name_en`, `area_id`, `created_at`, `updated_at`) VALUES
+(1, 'الرياض', 'elryad', 1, '2022-05-21 07:00:39', '2022-05-21 07:00:39'),
+(3, 'Meghan Travisyyyy', 'EricaRowlandyyyyy', 1, '2022-08-21 14:21:17', '2022-08-21 14:40:31');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -190,6 +219,12 @@ ALTER TABLE `admins`
 -- Indexes for table `areas`
 --
 ALTER TABLE `areas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -242,10 +277,16 @@ ALTER TABLE `areas`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -269,7 +310,7 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `sub_areas`
 --
 ALTER TABLE `sub_areas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
