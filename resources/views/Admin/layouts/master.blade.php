@@ -32,7 +32,8 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">مرحبا بـك ! <i class="fas fa-heart text-danger"></i></h1>
+{{--                        <h1 class="page-title">مرحبا بـك ! <i class="fas fa-heart text-danger"></i></h1>--}}
+                        <h1 class="page-title">مرحبا بـك  <span class="text-warning"> 👋 </span></h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('adminHome')}}">لوحة التحكم</a></li>
                             <li class="breadcrumb-item active" aria-current="page">@yield('page_name')</li>

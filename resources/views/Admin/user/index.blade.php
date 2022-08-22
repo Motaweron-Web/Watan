@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">قائمة المستخدمين</h3>
-                    <p>المستخدمين المسجلين في الموقع</p>
+                    <p>المستخدمين المسجلين في التطبيق</p>
                     <div class="">
 
                     </div>
@@ -21,10 +21,9 @@
                             <thead>
                             <tr class="fw-bolder text-muted bg-light">
                                 <th>#</th>
-                                <th>الصورة</th>
-                                <th>اسم المسخدم</th>
-                                <th>الايميل</th>
-                                <th>الرصيد</th>
+                                <th>المسخدم</th>
+                                <th>التواصل</th>
+                                <th>الحالة</th>
                                 <th class="rounded-end">العمليات</th>
                             </tr>
                             </thead>
@@ -90,25 +89,34 @@
         var columns = [
             {data: 'id', name: 'id'},
             {data: 'image', name: 'image'},
-            {data: 'user_name', name: 'user_name'},
-            {data: 'email', name: 'email'},
-            {data: 'balance', name: 'balance'},
+            {data: 'contact', name: 'contact'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
         showData('{{route('users.index')}}', columns);
         // Delete Using Ajax
+        deleteScript('{{route('users.delete')}}');
 
-        deleteScript('{{route('usersDelete')}}');
-
-        // Add Using Ajax
-        showAddModal('{{route('users.create')}}');
-        addScript();
-
-
-
-        // Edit Using Ajax
-        showEditModal('{{route('users.edit',':id')}}');
-        editScript();
+        // ِChange Status Using Ajax
+        $(document).on('click', '.statusSpan', function (event) {
+            var id = $(this).data("id")
+            $.ajax({
+                type: 'POST',
+                url: "{{route('userActivation')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id': id,
+                },
+                success: function (data) {
+                    if (data.success === true) {
+                        $('#dataTable').DataTable().ajax.reload();
+                        toastr.success(data.message)
+                    } else {
+                        toastr.error('هناك خطأ ما ...')
+                    }
+                }
+            })
+        });
     </script>
 @endsection
 

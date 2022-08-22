@@ -13,34 +13,40 @@ use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
-    use PhotoTrait;
     public function index(request $request)
     {
         if($request->ajax()) {
-            $user = User::latest()->get();
-            return Datatables::of($user)
-                ->addColumn('action', function ($user) {
+            $data = User::latest()->get();
+            return Datatables::of($data)
+                ->addColumn('action', function ($data) {
                     return '
                             <button class="btn btn-pill btn-danger-light" data-toggle="modal" data-target="#delete_modal"
-                                    data-id="' . $user->id . '" data-title="' . $user->user_name . '">
+                                    data-id="' . $data->id . '" data-title="' . $data->name . '">
                                     <i class="fas fa-trash"></i>
                             </button>
                        ';
                 })
-                ->editColumn('balance', function ($user) {
-                    if($user->balance != null)
-                        return $user->balance.' نقطة ' ;
+                ->editColumn('status', function ($data) {
+                    if($data->status == 0)
+                        $span = '<span style="cursor: pointer" data-id="'.$data->id.'" class="badge badge-danger statusSpan">محظور</span';
                     else
-                        return '<span class="badge badge-danger">لا يوجد نقاط</span>';
-                })
-                ->editColumn('email', function ($user) {
-                        return '<a href="mailto:'.$user->email.'">'.$user->email.'</a>';
-                })
+                        $span = '<span style="cursor: pointer" data-id="'.$data->id.'"  class="badge badge-success statusSpan">مفعل</span';
 
-                ->editColumn('image', function ($user) {
-                    $image = ($user->image);
+                    return $span;
+                })
+                ->editColumn('image', function ($data) {
+                    $name = $data->name;
                     return '
-                    <img alt="image" onclick="window.open(this.src)" class="avatar avatar-md rounded-circle" src="'.$image.'">
+                    <img onclick="window.open(this.src)" src="'.$data->image.'" alt="profile-user" class="brround  avatar-sm w-32 ml-2"> '.$name
+                        ;
+                })
+                ->addColumn('contact', function ($data) {
+                    return '
+                    <div class="wideget-user-icons mb-4">
+                    	<a href="tel:'.$data->phone.'" class="bg-info text-white btn btn-circle"><i class="fe fe-phone"></i></a>
+						<a href="https://wa.me/'.$data->whatsapp.'" class="bg-green-dark text-white btn btn-circle"><i class="fab fa-whatsapp"></i></a>
+						<a href="mailto:'.$data->email.'" class="bg-facebook text-white btn btn-circle"><i class="fe fe-mail"></i></a>
+					</div>
                     ';
                 })
                 ->escapeColumns([])
@@ -50,76 +56,18 @@ class UserController extends Controller
         }
     }
 
-
-    public function create()
+    public function userActivation(Request $request)
     {
-        return view('Admin.user.parts.create');
+        $user = User::find($request->id);
+        ($user->status == '0') ? $user->status = '1' : $user->status = '0';
+        $user->save();
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'تم تغيير حالة المستخدم بنجاح'
+            ]);
     }
 
-
-    public function store(Request $request)
-    {
-        $valiadate = $request->validate([
-           'user_name'     => 'required',
-           'password' => 'required|min:6',
-        ],[
-            'user_name.required' => 'يرجي ادخال اسم المستخدم'
-        ]);
-        $data = $request->except('_token','image');
-        if($request->has('image') && $request->image != null)
-            $data['image'] = $this->saveImage($request->image,'assets/uploads/users','image','100');
-
-        $data['password'] = Hash::make($request->password);
-        User::create($data);
-        return response()->json(['status' => 200]);
-    }
-
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        $user = User::find($id);
-        return view('Admin.user.parts.edit',compact('user'));
-    }
-
-
-
-    public function update(Request $request, $id)
-    {
-        $user = User::find($id);
-        $data = $request->except('_token','_method','image');
-
-        if($request->has('password') && $request->password != null)
-            $data['password'] = Hash::make($request->password);
-        else
-            unset($data['password']);
-
-        if($request->has('image') && $request->image != null){
-            if (file_exists($user->getAttributes()['image'])) {
-                unlink($user->getAttributes()['image']);
-            }
-            $data['image'] = $this->saveImage($request->image,'assets/uploads/users');
-        }
-
-        $user->update($data);
-        return response()->json(['status' => 200]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function delete(request $request)
     {

@@ -8,12 +8,12 @@ if (!function_exists('get_file')) {
     {
         if ($image!= null){
             if (!file_exists($image)){
-                return asset('uploads/noImage.png');
+                return asset('assets/uploads/empty.png');
             }else{
                 return asset($image);
             }
         }else{
-            return asset('uploads/noImage.png');
+            return asset('assets/uploads/empty.png');
         }
     }
 }

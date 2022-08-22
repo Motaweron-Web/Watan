@@ -87,8 +87,8 @@ class AreaController extends Controller
     {
         $inputs = $request->validate([
             'image'         => 'nullable|mimes:jpeg,jpg,png,gif,svg',
-            'name_ar'       => 'required',
-            'name_en'       => 'required',
+            'name_ar'       => 'required|unique:areas,name_ar,'.$id,
+            'name_en'       => 'required|unique:areas,name_ar,'.$id
         ]);
         $area = Area::findOrFail($id);
         if($request->has('image')){
