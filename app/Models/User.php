@@ -19,11 +19,7 @@ class User extends Authenticatable
     ##  Mutators and Accessors
     public function getImageAttribute()
     {
-        return get_file($this->attributes['image']);
-    }
-
-    public function sites(){
-        return $this->hasMany(Site::class,'user_id');
+        return get_user_file($this->attributes['image']);
     }
 
 

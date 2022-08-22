@@ -27,11 +27,6 @@ class SubAreaController extends Controller
                             </button>
                        ';
                 })
-//                ->addColumn('subArea', function ($data) {
-//                    $link = route('subArea',$data->id);
-//                    return '<a class="btn btn-pill btn-success" href="'.$link.'">معاينة <i class="fa fa-map text-white"></i> </a>';
-//                })
-
                 ->escapeColumns([])
                 ->make(true);
         }else{
@@ -86,11 +81,10 @@ class SubAreaController extends Controller
     public function update(request $request,$id)
     {
         $inputs = $request->validate([
-            'name_ar'       => 'required',
-            'name_en'       => 'required',
+            'name_ar'       => 'required|unique:areas,name_ar,'.$id,
+            'name_en'       => 'required|unique:areas,name_en,'.$id,
         ]);
         $area = SubArea::findOrFail($id);
-
         if ($area->update($inputs))
             return response()->json(['status' => 200]);
         else

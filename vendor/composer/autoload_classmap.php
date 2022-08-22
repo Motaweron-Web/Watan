@@ -41,7 +41,11 @@ return array(
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Area' => $baseDir . '/app/Models/Area.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
+<<<<<<< HEAD
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
+=======
+    'App\\Models\\Company' => $baseDir . '/app/Models/Company.php',
+>>>>>>> 2b97b2fb576c9bb9c45cbc74f3b4174cdbbec634
     'App\\Models\\Setting' => $baseDir . '/app/Models/Setting.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\SubArea' => $baseDir . '/app/Models/SubArea.php',

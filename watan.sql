@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2022 at 10:37 AM
+-- Generation Time: Aug 22, 2022 at 02:36 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -64,7 +64,8 @@ CREATE TABLE `areas` (
 --
 
 INSERT INTO `areas` (`id`, `name_ar`, `name_en`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'بغداد', 'Baghdad', 'assets/uploads/area/54481661155705.webp', '2022-08-21 07:44:37', '2022-08-22 08:08:25');
+(1, 'بغداد', 'Baghdad', 'assets/uploads/area/35041661158340.webp', '2022-08-21 07:44:37', '2022-08-22 08:52:20'),
+(6, 'البصرة', 'Basra', 'assets/uploads/area/47011661158443.webp', '2022-08-22 08:54:03', '2022-08-22 08:54:03');
 
 -- --------------------------------------------------------
 
@@ -90,6 +91,38 @@ INSERT INTO `categories` (`id`, `name_ar`, `name_en`, `created_at`, `updated_at`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `companies`
+--
+
+CREATE TABLE `companies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `whatsapp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` double DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
+  `about_ar` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `about_en` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`id`, `name_ar`, `name_en`, `image`, `number`, `whatsapp`, `facebook`, `instagram`, `twitter`, `latitude`, `longitude`, `about_ar`, `about_en`, `user_id`, `created_at`, `updated_at`) VALUES
+(2, 'شركة المنار الفرع الرئيسي', 'Al-Manar Company main branch', '1.png', '0101010101001', '+2001001010145', 'https://www.facebook.com/', 'https://www.instagram.com/', 'https://www.twitter.com/', 33.205548, 59.205548, 'الشركة الاولي في الوطن العربي للمجالات العقارية الشركة الاولي في الوطن العربي للمجالات العقارية الشركة الاولي في الوطن العربي للمجالات العقارية الشركة الاولي في الوطن العربي للمجالات العقارية الشركة الاولي في الوطن العربي للمجالات العقارية', 'The first company in the Arab world for real estate fields The first company in the Arab world for real estate fields The first company in the Arab world for real estate fields The first company in the Arab world for real estate fields The first company i', 1, '2022-08-22 09:33:36', '2022-08-22 09:33:36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -105,14 +138,15 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(2, '2022_07_21_143846_create_users_table', 1),
 (3, '2022_03_20_123415_create_admins_table', 1),
 (4, '2022_03_20_134518_create_settings_table', 1),
 (5, '2022_08_18_144158_create_sliders_table', 2),
 (6, '2022_08_18_162530_create_areas_table', 3),
 (7, '2022_08_18_162552_create_sub_areas_table', 3),
 (8, '2022_08_21_164212_create_categories_table', 4),
-(9, '2022_08_22_095635_create_sub_categories_table', 5);
+(9, '2022_08_22_095635_create_sub_categories_table', 5),
+(11, '2022_07_21_143846_create_users_table', 6),
+(12, '2022_08_22_111452_create_companies_table', 6);
 
 -- --------------------------------------------------------
 
@@ -235,6 +269,33 @@ INSERT INTO `sub_categories` (`id`, `name_ar`, `name_en`, `image`, `category_id`
 (7, 'adwqdw', 'qsdwqf', 'assets/uploads/subCategories/80141661157230.webp', 2, '2022-05-21 07:00:39', '2022-08-22 08:33:50'),
 (8, 'mnkfj', 'ghkk', 'assets/uploads/subCategories/26061661156687.webp', 2, '2022-08-22 08:24:47', '2022-08-22 08:24:47');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `whatsapp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0 is blocked , 1 is not blocked',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `whatsapp`, `phone`, `password`, `image`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'محمد خالد', 'mo@gmail.com', '+2001010154407', '+2001010448889', '%^&%^$%^#$%#$%ERDSFSDFSDF@#$@#$@#$%$%RT', '1.png', '1', NULL, '2022-08-22 11:36:02', '2022-08-22 11:46:30');
+
 --
 -- Indexes for dumped tables
 --
@@ -256,6 +317,12 @@ ALTER TABLE `areas`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `companies`
+--
+ALTER TABLE `companies`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -299,6 +366,12 @@ ALTER TABLE `sub_categories`
   ADD KEY `sub_categories_category_id_foreign` (`category_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -312,7 +385,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `areas`
 --
 ALTER TABLE `areas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -321,10 +394,16 @@ ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `companies`
+--
+ALTER TABLE `companies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -355,6 +434,12 @@ ALTER TABLE `sub_areas`
 --
 ALTER TABLE `sub_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

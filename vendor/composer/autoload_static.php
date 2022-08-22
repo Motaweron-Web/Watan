@@ -779,7 +779,11 @@ class ComposerStaticInitebadef4a2fe32872459d1dcc93c1fe4b
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Area' => __DIR__ . '/../..' . '/app/Models/Area.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
+<<<<<<< HEAD
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',
+=======
+        'App\\Models\\Company' => __DIR__ . '/../..' . '/app/Models/Company.php',
+>>>>>>> 2b97b2fb576c9bb9c45cbc74f3b4174cdbbec634
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\SubArea' => __DIR__ . '/../..' . '/app/Models/SubArea.php',
