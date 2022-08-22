@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2022 at 05:15 PM
+-- Generation Time: Aug 22, 2022 at 10:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -64,7 +64,7 @@ CREATE TABLE `areas` (
 --
 
 INSERT INTO `areas` (`id`, `name_ar`, `name_en`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'بغداد', 'Baghdad', 'assets/uploads/area/64291661067877.webp', '2022-08-21 07:44:37', '2022-08-21 07:44:37');
+(1, 'بغداد', 'Baghdad', 'assets/uploads/area/54481661155705.webp', '2022-08-21 07:44:37', '2022-08-22 08:08:25');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2022_08_18_144158_create_sliders_table', 2),
 (6, '2022_08_18_162530_create_areas_table', 3),
 (7, '2022_08_18_162552_create_sub_areas_table', 3),
-(8, '2022_08_21_164212_create_categories_table', 4);
+(8, '2022_08_21_164212_create_categories_table', 4),
+(9, '2022_08_22_095635_create_sub_categories_table', 5);
 
 -- --------------------------------------------------------
 
@@ -202,7 +203,37 @@ CREATE TABLE `sub_areas` (
 
 INSERT INTO `sub_areas` (`id`, `name_ar`, `name_en`, `area_id`, `created_at`, `updated_at`) VALUES
 (1, 'الرياض', 'elryad', 1, '2022-05-21 07:00:39', '2022-05-21 07:00:39'),
-(3, 'Meghan Travisyyyy', 'EricaRowlandyyyyy', 1, '2022-08-21 14:21:17', '2022-08-21 14:40:31');
+(3, 'Meghan Travisyyyy', 'EricaRowlandyyyyy', 1, '2022-08-21 14:21:17', '2022-08-21 14:40:31'),
+(4, 'جدة', 'ثبثب', 1, '2022-08-22 08:15:39', '2022-08-22 08:15:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_categories`
+--
+
+CREATE TABLE `sub_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sub_categories`
+--
+
+INSERT INTO `sub_categories` (`id`, `name_ar`, `name_en`, `image`, `category_id`, `created_at`, `updated_at`) VALUES
+(2, 'adwqdw', 'qsdwqf', 'assets/uploads/area/64291661067877.webp', 2, '2022-05-21 07:00:39', '2022-05-21 07:00:39'),
+(3, 'adwqdw', 'qsdwqf', 'assets/uploads/area/64291661067877.webp', 2, '2022-05-21 07:00:39', '2022-05-21 07:00:39'),
+(4, 'adwqdw', 'qsdwqf', 'assets/uploads/subCategories/6731661157407.PNG', 2, '2022-05-21 07:00:39', '2022-08-22 08:36:47'),
+(5, 'adwqdw', 'qsdwqf', 'assets/uploads/subCategories/25961661157318.webp', 2, '2022-05-21 07:00:39', '2022-08-22 08:35:18'),
+(6, 'adwqdwetyerhreherh', 'qsdreyeerreerwqf', 'assets/uploads/subCategories/32101661157252.webp', 2, '2022-05-21 07:00:39', '2022-08-22 08:34:12'),
+(7, 'adwqdw', 'qsdwqf', 'assets/uploads/subCategories/80141661157230.webp', 2, '2022-05-21 07:00:39', '2022-08-22 08:33:50'),
+(8, 'mnkfj', 'ghkk', 'assets/uploads/subCategories/26061661156687.webp', 2, '2022-08-22 08:24:47', '2022-08-22 08:24:47');
 
 --
 -- Indexes for dumped tables
@@ -261,6 +292,13 @@ ALTER TABLE `sub_areas`
   ADD KEY `sub_areas_area_id_foreign` (`area_id`);
 
 --
+-- Indexes for table `sub_categories`
+--
+ALTER TABLE `sub_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sub_categories_category_id_foreign` (`category_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -286,7 +324,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -310,7 +348,13 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `sub_areas`
 --
 ALTER TABLE `sub_areas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `sub_categories`
+--
+ALTER TABLE `sub_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -321,6 +365,12 @@ ALTER TABLE `sub_areas`
 --
 ALTER TABLE `sub_areas`
   ADD CONSTRAINT `sub_areas_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sub_categories`
+--
+ALTER TABLE `sub_categories`
+  ADD CONSTRAINT `sub_categories_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

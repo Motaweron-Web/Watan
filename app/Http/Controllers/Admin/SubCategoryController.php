@@ -4,19 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Area;
+use App\Models\Category;
 use App\Models\SubArea;
+use App\Models\SubCategory;
+use App\Traits\PhotoTrait;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class SubAreaController extends Controller
+class SubCategoryController extends Controller
 {
+    use PhotoTrait;
 
     public function index(Request $request,$id)
     {
-        $area=Area::findOrFail($id);
+        $category=Category::findOrFail($id);
 
         if($request->ajax()) {
-            $data = SubArea::where('area_id',$id)->orderBy('id','DESC')->get();
+            $data = SubCategory::where('category_id',$id)->orderBy('id','DESC')->get();
             return Datatables::of($data)
                 ->addColumn('action', function ($data) {
                     return '
@@ -27,6 +31,11 @@ class SubAreaController extends Controller
                             </button>
                        ';
                 })
+                ->editColumn('image', function ($data) {
+                    return '
+                    <img alt="logo" onclick="window.open(this.src)" style="cursor:pointer" class="avatar-lg bradius" src="'.$data->image.'">
+                    ';
+                })
 //                ->addColumn('subArea', function ($data) {
 //                    $link = route('subArea',$data->id);
 //                    return '<a class="btn btn-pill btn-success" href="'.$link.'">معاينة <i class="fa fa-map text-white"></i> </a>';
@@ -35,7 +44,7 @@ class SubAreaController extends Controller
                 ->escapeColumns([])
                 ->make(true);
         }else{
-            return view('Admin/subArea/index',compact('area'));
+            return view('Admin/subCategory/index',compact('category'));
         }
 
 
@@ -45,8 +54,8 @@ class SubAreaController extends Controller
 
     public function create($id)
     {
-       $area=Area::find($id);
-        return view('Admin/subArea.parts.create',compact('area'));
+        $category=Category::findOrFail($id);
+        return view('Admin/subCategory.parts.create',compact('category'));
     }
 
 
@@ -55,14 +64,19 @@ class SubAreaController extends Controller
         $request->validate([
             'name_ar'   => 'required|max:255|unique:areas,name_ar',
             'name_en'   => 'required|max:255|unique:areas,name_en',
-            'area_id'   => 'required|exists:areas,id'
+            'category_id'   => 'required|exists:categories,id',
+            'image'      => 'required|max:255|image',
+
         ],[
             'name_ar.unique'     => 'اسم الدولة العربي تم ادخاله مسبقا',
             'name_en.unique'     => 'اسم الدولة الانجليزية تم ادخاله مسبقا',
-            'area_id.exists'     =>'هذة المدينة غير مدرجة لدينا',
+            'category_id.exists'     =>'هذا القسم غير مدرجة لدينا',
+            'image.required'     => 'يرجي رفع صورة للقسم الفرعي',
+
         ]);
-        $data = $request->except('_token');
-        if(SubArea::create($data))
+        $data = $request->except('_token','image');
+        $data['image'] = $this->saveImage($request->image,'assets/uploads/subCategories','no');
+        if(SubCategory::create($data))
             return response()->json(['status'=>200]);
         else
             return response()->json(['status'=>405]);
@@ -77,8 +91,8 @@ class SubAreaController extends Controller
 
     public function edit($id)
     {
-        $area=SubArea::find($id);
-        return view('Admin/subArea.parts.edit',compact('area'));
+        $subCategory=SubCategory::findOrFail($id);
+        return view('Admin/subCategory.parts.edit',compact('subCategory'));
     }
 
 
@@ -86,12 +100,18 @@ class SubAreaController extends Controller
     public function update(request $request,$id)
     {
         $inputs = $request->validate([
+            'image'         => 'nullable|mimes:jpeg,jpg,png,gif,svg',
             'name_ar'       => 'required',
             'name_en'       => 'required',
         ]);
-        $area = SubArea::findOrFail($id);
-
-        if ($area->update($inputs))
+        $subCategory = SubCategory::findOrFail($id);
+        if($request->has('image')){
+            if (file_exists($subCategory->image)) {
+                unlink($subCategory->image);
+            }
+            $inputs['image'] = $this->saveImage($request->image,'assets/uploads/subCategories','no');
+        }
+        if ($subCategory->update($inputs))
             return response()->json(['status' => 200]);
         else
             return response()->json(['status' => 405]);
@@ -99,8 +119,10 @@ class SubAreaController extends Controller
 
     public function delete(Request $request)
     {
-        $row = SubArea::findOrFail($request->id);
-
+        $row = SubCategory::findOrFail($request->id);
+        if (file_exists($row->getAttributes()['image'])) {
+            unlink($row->getAttributes()['image']);
+        }
         $row->delete();
         return response(['message'=>'تم الحذف بنجاح','status'=>200],200);
     }

@@ -27,7 +27,10 @@ class CategoryController extends Controller
                             </button>
                        ';
                 })
-
+                ->addColumn('subCategory', function ($data) {
+                    $link = route('subCategory',$data->id);
+                    return '<a class="btn btn-pill btn-success" href="'.$link.'">معاينة <i class="fa fa-map text-white"></i> </a>';
+                })
                 ->escapeColumns([])
                 ->make(true);
         }else{

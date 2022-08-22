@@ -1,13 +1,13 @@
 @extends('Admin/layouts/master')
 
-@section('title')  {{($setting->title) ?? ''}} | الاقسام الرئسيسة@endsection
-@section('page_name') الاقسام الرئسيسة @endsection
+@section('title')  {{($setting->title) ?? ''}} الاقسام الفرعية للقسم {{$category->name_ar}} @endsection
+@section('page_name')  الاقسام الفرعية @endsection
 @section('content')
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">الاقسام الرئسيسة</h3>
+                    <h3 class="card-title"> الاقسام الفرعية</h3>
                     <div class="">
                         <button class="btn btn-secondary btn-icon text-white addBtn">
 									<span>
@@ -24,10 +24,9 @@
                             <thead>
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="min-w-25px">#</th>
+                                <th class="min-w-50px">الصورة</th>
                                 <th class="min-w-50px">الاسم (ar)</th>
                                 <th class="min-w-50px">الاسم (en)</th>
-                                <th class="min-w-50px">معاينة</th>
-
                                 <th class="min-w-50px rounded-end">العمليات</th>
                             </tr>
                             </thead>
@@ -87,20 +86,19 @@
     <script>
         var columns = [
             {data: 'id', name: 'id'},
+            {data: 'image', name: 'image'},
             {data: 'name_ar', name: 'name_ar'},
             {data: 'name_en', name: 'name_en'},
-            {data: 'subCategory', name: 'subCategory'},
-
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
-        showData('{{route('categories.index')}}', columns);
+        showData('{{route('subCategory',$category->id)}}', columns);
         // Delete Using Ajax
-        deleteScript('{{route('categories.delete')}}');
+        deleteScript('{{route('subCategory.delete')}}');
         // Add Using Ajax
-        showAddModal('{{route('categories.create')}}');
+        showAddModal('{{route('subCategory.create',$category->id)}}');
         addScript();
         // Edit Using Ajax
-        showEditModal('{{route('categories.edit',':id')}}');
+        showEditModal('{{route('subCategory.edit',':id')}}');
         editScript();
     </script>
 @endsection
