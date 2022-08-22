@@ -1,13 +1,13 @@
 @extends('Admin/layouts/master')
 
-@section('title')  {{($setting->title) ?? ''}} | الاقسام الرئيسة@endsection
-@section('page_name') الاقسام الرئسيسة @endsection
+@section('title')  {{($setting->title) ?? ''}} | المقالات @endsection
+@section('page_name')  المقالات @endsection
 @section('content')
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">الاقسام الرئيسة</h3>
+                    <h3 class="card-title"> المقالات</h3>
                     <div class="">
                         <button class="btn btn-secondary btn-icon text-white addBtn">
 									<span>
@@ -24,10 +24,11 @@
                             <thead>
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="min-w-25px">#</th>
+                                <th class="min-w-50px">الصورة</th>
                                 <th class="min-w-50px">الاسم (ar)</th>
                                 <th class="min-w-50px">الاسم (en)</th>
-                                <th class="min-w-50px">الاقسام الفرعية</th>
-
+                                <th class="min-w-50px">الوصف (ar)</th>
+                                <th class="min-w-50px">الوصف (en)</th>
                                 <th class="min-w-50px rounded-end">العمليات</th>
                             </tr>
                             </thead>
@@ -68,7 +69,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="example-Modal3">بيانات المدينة</h5>
+                        <h5 class="modal-title" id="example-Modal3">بيانات المقال</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -87,20 +88,21 @@
     <script>
         var columns = [
             {data: 'id', name: 'id'},
+            {data: 'image', name: 'image'},
             {data: 'name_ar', name: 'name_ar'},
             {data: 'name_en', name: 'name_en'},
-            {data: 'subCategory', name: 'subCategory'},
-
+            {data: 'description_ar', name: 'description_ar'},
+            {data: 'description_en', name: 'description_en'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
-        showData('{{route('categories.index')}}', columns);
+        showData('{{route('blogs.index')}}', columns);
         // Delete Using Ajax
-        deleteScript('{{route('categories.delete')}}');
+        deleteScript('{{route('blog.delete')}}');
         // Add Using Ajax
-        showAddModal('{{route('categories.create')}}');
+        showAddModal('{{route('blogs.create')}}');
         addScript();
         // Edit Using Ajax
-        showEditModal('{{route('categories.edit',':id')}}');
+        showEditModal('{{route('blogs.edit',':id')}}');
         editScript();
     </script>
 @endsection

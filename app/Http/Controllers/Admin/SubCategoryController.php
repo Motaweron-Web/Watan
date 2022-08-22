@@ -62,14 +62,14 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar'   => 'required|max:255|unique:areas,name_ar',
-            'name_en'   => 'required|max:255|unique:areas,name_en',
+            'name_ar'   => 'required|max:255|unique:subCategories,name_ar',
+            'name_en'   => 'required|max:255|unique:subCategories,name_en',
             'category_id'   => 'required|exists:categories,id',
             'image'      => 'required|max:255|image',
 
         ],[
-            'name_ar.unique'     => 'اسم الدولة العربي تم ادخاله مسبقا',
-            'name_en.unique'     => 'اسم الدولة الانجليزية تم ادخاله مسبقا',
+            'name_ar.unique'     => 'اسم القسم الفرعي العربي تم ادخاله مسبقا',
+            'name_en.unique'     => 'اسم القسم الفرعي الانجليزية تم ادخاله مسبقا',
             'category_id.exists'     =>'هذا القسم غير مدرجة لدينا',
             'image.required'     => 'يرجي رفع صورة للقسم الفرعي',
 
@@ -101,8 +101,8 @@ class SubCategoryController extends Controller
     {
         $inputs = $request->validate([
             'image'         => 'nullable|mimes:jpeg,jpg,png,gif,svg',
-            'name_ar'       => 'required',
-            'name_en'       => 'required',
+            'name_ar'   => 'required|max:255|unique:subCategories,name_ar,'.$id,
+            'name_en'   => 'required|max:255|unique:subCategories,name_en,'.$id,
         ]);
         $subCategory = SubCategory::findOrFail($id);
         if($request->has('image')){

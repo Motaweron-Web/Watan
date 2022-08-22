@@ -46,11 +46,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar'   => 'required|max:255|unique:areas,name_ar',
-            'name_en'   => 'required|max:255|unique:areas,name_en',
+            'name_ar'   => 'required|max:255|unique:categories,name_ar',
+            'name_en'   => 'required|max:255|unique:categories,name_en',
         ],[
-            'name_ar.unique'     => 'اسم الدولة العربي تم ادخاله مسبقا',
-            'name_en.unique'     => 'اسم الدولة الانجليزية تم ادخاله مسبقا',
+            'name_ar.unique'     => 'اسم القسم الرئيسي العربي تم ادخاله مسبقا',
+            'name_en.unique'     => 'اسم القسم الرئيسي  الانجليزية تم ادخاله مسبقا',
         ]);
         $data = $request->except('_token');
         if(Category::create($data))
@@ -70,8 +70,8 @@ class CategoryController extends Controller
     public function update(request $request,$id)
     {
         $inputs = $request->validate([
-            'name_ar'       => 'required',
-            'name_en'       => 'required',
+            'name_ar'   => 'required|max:255|unique:categories,name_ar,'.$id,
+            'name_en'   => 'required|max:255|unique:categories,name_en,'.$id,
         ]);
         $category = Category::findOrFail($id);
 

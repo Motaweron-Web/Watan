@@ -55,6 +55,21 @@ Route::group(['prefix'=>'admin','middleware'=>'auth:admin'],function (){
     Route::post('subCategory.update/{id}', 'SubCategoryController@update')->name('subCategory.update');
 
 
+    #### Services  #########
+
+    Route::resource('services','ServiceController');
+    Route::POST('service','ServiceController@delete')->name('service.delete');
+
+
+    #### Blogs   #################
+
+
+    Route::resource('blogs','BlogController');
+    Route::POST('delete/blog','BlogController@delete')->name('blog.delete');
+
+
+
+
 
 
 
