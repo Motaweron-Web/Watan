@@ -38,13 +38,13 @@
 
         <li class="slide">
             <a class="side-menu__item" href="{{route('services.index')}}">
-                <i class="icon-directions side-menu__icon"></i>
+                <i class="fe fe-zap side-menu__icon"></i>
                 <span class="side-menu__label"> الخدمات</span>
             </a>
         </li>
         <li class="slide">
             <a class="side-menu__item" href="{{route('blogs.index')}}">
-                    <i class="fa-solid fa-blog side-menu__icon"></i>
+                    <i class="fe fe-edit-3 side-menu__icon"></i>
                 <span class="side-menu__label"> المقالات</span>
             </a>
         </li>
