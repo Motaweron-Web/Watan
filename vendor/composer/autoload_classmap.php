@@ -13,9 +13,12 @@ return array(
     'App\\Events\\NewMessage' => $baseDir . '/app/Events/NewMessage.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Admin\\AdminController' => $baseDir . '/app/Http/Controllers/Admin/AdminController.php',
+    'App\\Http\\Controllers\\Admin\\AgentController' => $baseDir . '/app/Http/Controllers/Admin/AgentController.php',
     'App\\Http\\Controllers\\Admin\\AreaController' => $baseDir . '/app/Http/Controllers/Admin/AreaController.php',
     'App\\Http\\Controllers\\Admin\\AuthController' => $baseDir . '/app/Http/Controllers/Admin/AuthController.php',
+    'App\\Http\\Controllers\\Admin\\BlogController' => $baseDir . '/app/Http/Controllers/Admin/BlogController.php',
     'App\\Http\\Controllers\\Admin\\CategoryController' => $baseDir . '/app/Http/Controllers/Admin/CategoryController.php',
+    'App\\Http\\Controllers\\Admin\\CompanyController' => $baseDir . '/app/Http/Controllers/Admin/CompanyController.php',
     'App\\Http\\Controllers\\Admin\\ServiceController' => $baseDir . '/app/Http/Controllers/Admin/ServiceController.php',
     'App\\Http\\Controllers\\Admin\\SliderController' => $baseDir . '/app/Http/Controllers/Admin/SliderController.php',
     'App\\Http\\Controllers\\Admin\\SubAreaController' => $baseDir . '/app/Http/Controllers/Admin/SubAreaController.php',
@@ -40,12 +43,10 @@ return array(
     'App\\Http\\Requests\\StoreSite' => $baseDir . '/app/Http/Requests/StoreSite.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Area' => $baseDir . '/app/Models/Area.php',
+    'App\\Models\\Blog' => $baseDir . '/app/Models/Blog.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
-<<<<<<< HEAD
-    'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
-=======
     'App\\Models\\Company' => $baseDir . '/app/Models/Company.php',
->>>>>>> 2b97b2fb576c9bb9c45cbc74f3b4174cdbbec634
+    'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
     'App\\Models\\Setting' => $baseDir . '/app/Models/Setting.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\SubArea' => $baseDir . '/app/Models/SubArea.php',
