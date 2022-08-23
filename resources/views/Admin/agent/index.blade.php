@@ -1,13 +1,20 @@
 @extends('Admin/layouts/master')
 
-@section('title')  {{($setting->title) ?? ''}} | المكاتب العقارية @endsection
-@section('page_name') المكاتب العقارية @endsection
+@section('title')  {{($setting->title) ?? ''}} وكلاء شركة {{$company->name_ar}} @endsection
+@section('page_name')  الوكلاء @endsection
 @section('content')
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">المكاتب العقارية</h3>
+                    <h3 class="card-title"> الوكلاء</h3>
+                    <div class="">
+                        <button class="btn btn-secondary btn-icon text-white addBtn">
+									<span>
+										<i class="fe fe-plus"></i>
+									</span> اضافة جديد
+                        </button>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -17,13 +24,12 @@
                             <thead>
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="min-w-25px">#</th>
-                                <th class="min-w-50px">المكتب</th>
-                                <th class="min-w-50px">المستخدم</th>
+                                <th class="min-w-50px">الصورة</th>
+                                <th class="min-w-50px">الاسم (ar)</th>
+                                <th class="min-w-50px">الاسم (en)</th>
                                 <th class="min-w-50px">الهاتف</th>
-                                <th class="min-w-50px">عن المكتب</th>
-                                <th class="min-w-50px">التواصل</th>
-                                <th class="min-w-50px">الموقع</th>
-                                <th class="min-w-50px">الوكلاء</th>
+                                <th class="min-w-50px">الواتساب</th>
+                                <th class="min-w-50px">عنا </th>
 
                                 <th class="min-w-50px rounded-end">العمليات</th>
                             </tr>
@@ -59,6 +65,24 @@
             </div>
         </div>
         <!-- MODAL CLOSED -->
+
+        <!-- Edit MODAL -->
+        <div class="modal fade bd-example-modal-lg" id="editOrCreate" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="example-Modal3">بيانات الوكيل</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit MODAL CLOSED -->
     </div>
     @include('Admin/layouts/myAjaxHelper')
 @endsection
@@ -67,18 +91,22 @@
         var columns = [
             {data: 'id', name: 'id'},
             {data: 'image', name: 'image'},
-            {data: 'user_id', name: 'user_id'},
-            {data: 'number', name: 'number'},
-            {data: 'about_ar', name: 'about_ar'},
-            {data: 'contact', name: 'contact'},
-            {data: 'location', name: 'location'},
-            {data: 'agent', name: 'agent'},
-
+            {data: 'name_ar', name: 'name_ar'},
+            {data: 'name_en', name: 'name_en'},
+            {data: 'phone', name: 'phone'},
+            {data: 'whatsapp', name: 'whatsapp'},
+            {data: 'about', name: 'about'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
-        showData('{{route('companies.index')}}', columns);
+        showData('{{route('agents',$company->id)}}', columns);
         // Delete Using Ajax
-        deleteScript('{{route('companies.delete')}}');
+        deleteScript('{{route('agents.delete')}}');
+        // Add Using Ajax
+        showAddModal('{{route('agents.create',$company->id)}}');
+        addScript();
+        // Edit Using Ajax
+        showEditModal('{{route('agents.edit',':id')}}');
+        editScript();
     </script>
 @endsection
 

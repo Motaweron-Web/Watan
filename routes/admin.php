@@ -61,7 +61,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('subCategory.update/{id}', 'SubCategoryController@update')->name('subCategory.update');
 
 
-<<<<<<< HEAD
     #### Services  #########
 
     Route::resource('services','ServiceController');
@@ -76,12 +75,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
 
 
+    ###  agents ###################
+    Route::get('agent/{id}', 'AgentController@index')->name('agents');
+    Route::post('agent/delete', 'AgentController@delete')->name('agents.delete');
+    Route::get('agent/create/{company_id}', 'AgentController@create')->name('agents.create');
+    Route::post('agent/store', 'AgentController@store')->name('agents.store');
+    Route::get('agent/edit/{id}', 'AgentController@edit')->name('agents.edit');
+    Route::post('agent/update/{id}', 'AgentController@update')->name('agents.update');
 
 
 
 
-=======
->>>>>>> 2b97b2fb576c9bb9c45cbc74f3b4174cdbbec634
+
+
     #### Auth ####
 
 
@@ -94,6 +100,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     Route::resource('points', 'PointController');
     Route::POST('delete_point', 'PointController@delete')->name('delete_point');
+
+
+
+
+
+
 
 
 });
