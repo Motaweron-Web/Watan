@@ -68,8 +68,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
 
     #### Blogs   #################
-
-
     Route::resource('blogs','BlogController');
     Route::POST('delete/blog','BlogController@delete')->name('blog.delete');
 
@@ -85,19 +83,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
 
 
+<<<<<<< HEAD
 
 
 
     #### Auth ####
 
 
+=======
+>>>>>>> cd1dd910d42565fde026114c877a4f308ba25d91
     #### Auth ####
     Route::get('logout', 'AuthController@logout')->name('admin.logout');
 
 
     ### Points #######
-
-
     Route::resource('points', 'PointController');
     Route::POST('delete_point', 'PointController@delete')->name('delete_point');
 
