@@ -29,8 +29,7 @@
                                 <th class="min-w-50px">الاسم (en)</th>
                                 <th class="min-w-50px">الهاتف</th>
                                 <th class="min-w-50px">الواتساب</th>
-                                <th class="min-w-50px">عنا </th>
-
+                                <th class="min-w-50px">نبذة تعريفة</th>
                                 <th class="min-w-50px rounded-end">العمليات</th>
                             </tr>
                             </thead>

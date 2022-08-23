@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label for="btn_link" class="form-control-label">عنا</label>
+                    <label for="btn_link" class="form-control-label">نبذة تعريفية</label>
                     <input type="text" required class="form-control" value="{{$agent->about}}" name="about" placeholder="">
                 </div>
             </div>

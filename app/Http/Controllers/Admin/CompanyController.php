@@ -31,7 +31,7 @@ class CompanyController extends Controller
                 })
                 ->addColumn('agent', function ($data) {
                     $link = route('agents',$data->id);
-                    return '<a class="btn btn-pill btn-success" href="'.$link.'">معاينة <i class="fa fa-map text-white"></i> </a>';
+                    return '<a class="btn btn-pill btn-success" href="'.$link.'">عرض <i class="fa fa-user text-white"></i> </a>';
                 })
                 ->editColumn('about_ar', function ($data) {
                     return Str::limit($data->name_ar,100);

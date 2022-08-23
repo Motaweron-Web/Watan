@@ -37,11 +37,19 @@
         </li>
 
         <li class="slide">
-            <a class="side-menu__item" href="{{route('services.index')}}">
-                <i class="fe fe-zap side-menu__icon"></i>
-                <span class="side-menu__label"> الخدمات</span>
+            <a class="side-menu__item" href="{{route('projects.index')}}">
+                <i class="fe fe-dollar-sign side-menu__icon"></i>
+                <span class="side-menu__label"> المشاريع الاستثمارية</span>
             </a>
         </li>
+
+{{--        <li class="slide">--}}
+{{--            <a class="side-menu__item" href="{{route('services.index')}}">--}}
+{{--                <i class="fe fe-zap side-menu__icon"></i>--}}
+{{--                <span class="side-menu__label"> الخدمات</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
+
         <li class="slide">
             <a class="side-menu__item" href="{{route('blogs.index')}}">
                     <i class="fe fe-edit-3 side-menu__icon"></i>

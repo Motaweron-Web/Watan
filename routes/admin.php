@@ -83,15 +83,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
 
 
-<<<<<<< HEAD
+    ### projects ########
+    Route::resource('projects', 'ProjectController');
+    Route::post('project.delete', 'ProjectController@delete')->name('project.delete');
 
 
-
-    #### Auth ####
-
-
-=======
->>>>>>> cd1dd910d42565fde026114c877a4f308ba25d91
     #### Auth ####
     Route::get('logout', 'AuthController@logout')->name('admin.logout');
 
