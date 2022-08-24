@@ -24,10 +24,9 @@
                             <thead>
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="min-w-25px">#</th>
-                                <th class="min-w-50px">الصورة</th>
+                                <th class="min-w-50px">الايقون</th>
                                 <th class="min-w-50px">الاسم (ar)</th>
                                 <th class="min-w-50px">الاسم (en)</th>
-                                <th class="min-w-50px">الايقون</th>
                                 <th class="min-w-50px rounded-end">العمليات</th>
                             </tr>
                             </thead>
@@ -87,10 +86,9 @@
     <script>
         var columns = [
             {data: 'id', name: 'id'},
-            {data: 'image', name: 'image'},
+            {data: 'icon', name: 'icon'},
             {data: 'name_ar', name: 'name_ar'},
             {data: 'name_en', name: 'name_en'},
-            {data: 'icon', name: 'icon'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
         showData('{{route('services.index')}}', columns);

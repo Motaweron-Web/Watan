@@ -18,9 +18,11 @@
                             <tr class="fw-bolder text-muted bg-light">
                                 <th>#</th>
                                 <th>المشروع</th>
+                                <th>القسم</th>
                                 <th>أضيف بواسطة</th>
                                 <th>السعر</th>
                                 <th>الحالة</th>
+                                <th>وقت الاضافة</th>
                                 <th class="rounded-end">العمليات</th>
                             </tr>
                             </thead>
@@ -65,9 +67,11 @@
         var columns = [
             {data: 'id', name: 'id'},
             {data: 'image', name: 'image'},
+            {data: 'category_id', name: 'category_id'},
             {data: 'added_by', name: 'added_by'},
             {data: 'price', name: 'price'},
             {data: 'project_status', name: 'project_status'},
+            {data: 'created_at', name: 'created_at'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
         showData('{{route('projects.index')}}', columns);

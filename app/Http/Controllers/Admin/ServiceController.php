@@ -54,18 +54,18 @@ class ServiceController extends Controller
         $request->validate([
             'name_ar'   => 'required|max:255|unique:services,name_ar',
             'name_en'   => 'required|max:255|unique:services,name_en',
-            'image'      => 'required|max:255|image',
+//            'image'      => 'required|max:255|image',
             'icon'      => 'required|max:255|image',
 
         ],[
             'name_ar.unique'     => 'اسم الخدمة العربي تم ادخاله مسبقا',
             'name_en.unique'     => 'اسم الخدمة الانجليزية تم ادخاله مسبقا',
-            'image.required'     => 'يرجي رفع صورة الخدمة',
+//            'image.required'     => 'يرجي رفع صورة الخدمة',
             'icon.required'     => 'يرجي رفع صورة ايقون الخدمة',
 
         ]);
         $data = $request->except('_token','image','icon');
-        $data['image'] = $this->saveImage($request->image,'assets/uploads/service/images','no');
+//        $data['image'] = $this->saveImage($request->image,'assets/uploads/service/images','no');
         $data['icon'] = $this->saveImage($request->icon,'assets/uploads/service/icons','no');
 
         if(Service::create($data))
@@ -97,16 +97,16 @@ class ServiceController extends Controller
         $inputs = $request->validate([
             'name_ar'   => 'required|max:255|unique:services,name_ar,'.$id,
             'name_en'   => 'required|max:255|unique:services,name_en,'.$id,
-            'image'      => 'nullable|max:255|image',
+//            'image'      => 'nullable|max:255|image',
             'icon'      => 'nullable|max:255|image',
         ]);
         $service = Service::findOrFail($id);
-        if($request->has('image')){
-            if (file_exists($service->image)) {
-                unlink($service->image);
-            }
-            $inputs['image'] = $this->saveImage($request->image,'assets/uploads/service/images','no');
-        }
+//        if($request->has('image')){
+//            if (file_exists($service->image)) {
+//                unlink($service->image);
+//            }
+//            $inputs['image'] = $this->saveImage($request->image,'assets/uploads/service/images','no');
+//        }
 
         if($request->has('icon')){
             if (file_exists($service->icon)) {
@@ -131,9 +131,9 @@ class ServiceController extends Controller
     public function delete(Request $request)
     {
         $row = Service::findOrFail($request->id);
-        if (file_exists($row->getAttributes()['image'])) {
-            unlink($row->getAttributes()['image']);
-        }
+//        if (file_exists($row->getAttributes()['image'])) {
+//            unlink($row->getAttributes()['image']);
+//        }
         if (file_exists($row->getAttributes()['icon'])) {
             unlink($row->getAttributes()['icon']);
         }

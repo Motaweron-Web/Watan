@@ -17,7 +17,7 @@
                             <thead>
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="min-w-25px">#</th>
-                                <th class="min-w-50px">المكتب</th>
+                                <th style="min-width: 200px">المكتب</th>
                                 <th class="min-w-50px">المستخدم</th>
                                 <th class="min-w-50px">الهاتف</th>
                                 <th class="min-w-50px">عن المكتب</th>

@@ -62,8 +62,8 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar'   => 'required|max:255|unique:subCategories,name_ar',
-            'name_en'   => 'required|max:255|unique:subCategories,name_en',
+            'name_ar'   => 'required|max:255|unique:sub_categories,name_ar',
+            'name_en'   => 'required|max:255|unique:sub_categories,name_en',
             'category_id'   => 'required|exists:categories,id',
             'image'      => 'required|max:255|image',
 
@@ -101,8 +101,8 @@ class SubCategoryController extends Controller
     {
         $inputs = $request->validate([
             'image'         => 'nullable|mimes:jpeg,jpg,png,gif,svg',
-            'name_ar'   => 'required|max:255|unique:subCategories,name_ar,'.$id,
-            'name_en'   => 'required|max:255|unique:subCategories,name_en,'.$id,
+            'name_ar'   => 'required|max:255|unique:sub_categories,name_ar,'.$id,
+            'name_en'   => 'required|max:255|unique:sub_categories,name_en,'.$id,
         ]);
         $subCategory = SubCategory::findOrFail($id);
         if($request->has('image')){

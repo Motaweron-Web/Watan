@@ -15,7 +15,7 @@ class CreateFilesOfProjectsAndPostsTable extends Migration
     {
         Schema::create('files_of_projects_and_posts', function (Blueprint $table) {
             $table->id();
-
+            $table->string('attachment')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
             $table->foreign('projects_id')->references('id')->on('projects')
                 ->onUpdate('cascade')->onDelete('cascade');

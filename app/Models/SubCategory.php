@@ -9,6 +9,7 @@ class SubCategory extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'sub_categories';
 
 
     ##  Mutators and Accessors

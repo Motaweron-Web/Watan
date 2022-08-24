@@ -4,13 +4,13 @@
         <input type="hidden" name="id" value="{{$service->id}}">
         <div class="row">
 
-            <div class="form-group col-md-6">
-                <label for="image" class="form-control-label">الصورة</label>
-                <input type="file" class="dropify" name="image" accept="image/png, image/gif, image/jpeg,image/jpg" data-default-file="{{$service->image}}"/>
-                <span class="form-text text-danger text-center">مسموح بالصيغ الاتية png, gif, jpeg, jpg</span>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="image" class="form-control-label">الايكون</label>
+{{--            <div class="form-group col-md-6">--}}
+{{--                <label for="image" class="form-control-label">الصورة</label>--}}
+{{--                <input type="file" class="dropify" name="image" accept="image/png, image/gif, image/jpeg,image/jpg" data-default-file="{{$service->image}}"/>--}}
+{{--                <span class="form-text text-danger text-center">مسموح بالصيغ الاتية png, gif, jpeg, jpg</span>--}}
+{{--            </div>--}}
+            <div class="form-group col-md-12">
+                <label for="image" class="form-control-label">الايقون</label>
                 <input type="file" class="dropify" name="icon" accept="image/png, image/gif, image/jpeg,image/jpg" data-default-file="{{$service->icon}}"/>
                 <span class="form-text text-danger text-center">مسموح بالصيغ الاتية png, gif, jpeg, jpg</span>
             </div>

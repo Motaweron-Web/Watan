@@ -86,6 +86,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     ### projects ########
     Route::resource('projects', 'ProjectController');
     Route::post('project.delete', 'ProjectController@delete')->name('project.delete');
+    Route::get('projectProfile/{id}', 'ProjectController@projectProfile')->name('projectProfile');
 
 
     #### Auth ####
