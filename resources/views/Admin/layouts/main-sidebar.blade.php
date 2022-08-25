@@ -21,6 +21,18 @@
             </a>
         </li>
 
+
+
+        <li class="slide">
+            <a class="side-menu__item" href="{{route('posts.index')}}">
+                <i class="fas fa-sticky-note side-menu__icon"></i>
+                <span class="side-menu__label">الاعلانات</span>
+            </a>
+        </li>
+
+
+
+
         <li class="slide">
             <a class="side-menu__item" href="{{route('sliders.index')}}">
                 <i class="fe fe-camera side-menu__icon"></i>

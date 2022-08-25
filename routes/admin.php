@@ -101,6 +101,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
 
 
+    ####  posts ################
+    Route::resource('posts', 'PostController');
+    Route::post('post.delete', 'PostController@delete')->name('post.delete');
+    Route::get('postProfile/{id}', 'PostController@postProfile')->name('postProfile');
+
+
 
 
 
